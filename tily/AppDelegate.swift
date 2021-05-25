@@ -56,7 +56,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ notification: Notification) {
         Manager.shared.stop_process(process: "yabai")
         Manager.shared.stop_process(process: "Übersicht")
-        applicationWillTerminate(notification)
     }
 }
 

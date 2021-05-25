@@ -101,12 +101,22 @@ struct ContentView: View {
                         .font(.title3)
                         .fontWeight(.semibold)
                     HStack {
-                        Text("restart dock.app")
+                        Text("restart dock")
                         Spacer()
                         Button(action: {
                             Manager.shared.stop_process(process: "Dock")
                         }) {
                             Image(systemName: "nosign")
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+                    }
+                    HStack {
+                        Text("exit tily")
+                        Spacer()
+                        Button(action: {
+                            NSApplication.shared.terminate(self)
+                        }) {
+                            Image(systemName: "xmark.circle.fill")
                         }
                         .buttonStyle(BorderlessButtonStyle())
                     }
