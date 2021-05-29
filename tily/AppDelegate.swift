@@ -35,8 +35,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
              button.action = #selector(togglePopover(_:))
         }
         statusBarItem?.button?.action = #selector(AppDelegate.togglePopover(_:))
-        Manager.shared.stop_process(process: "yabai")
-        Manager.shared.stop_process(process: "Übersicht")
     }
     @objc func showPopover(_ sender: AnyObject?) {
         if let button = statusBarItem?.button {

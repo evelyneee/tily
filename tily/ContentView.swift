@@ -10,6 +10,7 @@ import Cocoa
 
 struct ContentView: View {
     @State var status: Bool = false
+    @State var yabaiPath: String = "find yabai"
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading) {
@@ -23,18 +24,10 @@ struct ContentView: View {
                             .font(.title3)
                             .fontWeight(.semibold)
                         Spacer()
-                        switch status {
-                        case true:
-                            Circle()
-                                .foregroundColor(Color.green.opacity(0.75))
-                                .frame(width: 10, height: 10)
-                                .padding(.trailing, 5)
-                        case false:
-                            Circle()
-                                .foregroundColor(Color.red.opacity(0.75))
-                                .frame(width: 10, height: 10)
-                                .padding(.trailing, 5)
-                        }
+                        Circle()
+                            .foregroundColor((status ? Color.green.opacity(0.75) : Color.red.opacity(0.75)))
+                            .frame(width: 10, height: 10)
+                            .padding(.trailing, 5)
                     }
                     HStack {
                         Text("start yabai")
@@ -48,7 +41,7 @@ struct ContentView: View {
                         .buttonStyle(BorderlessButtonStyle())
                     }
                     HStack {
-                        Text("stop yabai")
+                        Text("pause yabai")
                         Spacer()
                         Button(action: {
                             Manager.shared.stop_process(process: "yabai")
@@ -78,7 +71,7 @@ struct ContentView: View {
                         Text("start übersicht")
                         Spacer()
                         Button(action: {
-                            Manager.shared.openFile(path: "/Applications/Übersicht.app")
+                            _ = Manager.shared.openFile(path: "/Applications/Übersicht.app")
                         }) {
                             Image(systemName: "play.fill")
                         }
@@ -107,6 +100,16 @@ struct ContentView: View {
                             Manager.shared.stop_process(process: "Dock")
                         }) {
                             Image(systemName: "nosign")
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+                    }
+                    HStack {
+                        Text(yabaiPath)
+                        Spacer()
+                        Button(action: {
+                            yabaiPath = "found it at \(Manager.shared.findBinary(bin: "yabai", withPath: Manager.shared.getPath()))"
+                        }) {
+                            Image(systemName: "location.fill")
                         }
                         .buttonStyle(BorderlessButtonStyle())
                     }
